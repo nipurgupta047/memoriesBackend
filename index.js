@@ -50,7 +50,7 @@ app.use(cors());
 //////////////////////////
 
 // test
-app.get('test',(req,res)=>{
+app.get('/test',(req,res)=>{
   res.send('it is working')
 })
 
