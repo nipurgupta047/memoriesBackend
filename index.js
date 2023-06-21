@@ -49,6 +49,11 @@ app.use(cors());
 ///     API routes     ///
 //////////////////////////
 
+// test
+app.get('test',(req,res)=>{
+  res.send('it is working')
+})
+
 // login 
 app.post('/login',async (req, res) => {
 
