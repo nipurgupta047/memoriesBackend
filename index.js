@@ -113,12 +113,14 @@ app.post('/signup',async (req, res) => {
 
 // get username
 app.post('/getUsername', (req, res) => {
-  // const token = req.body.token;
+  const token = req.body.token;
   // console.log(token)
   try {
     const user = jwt.verify(token,JWT_SECRET_KEY)
+    // console.log('user',user)
     return res.send({un:user.username});
   } catch (error) {
+    // console.log('not verified')
     return res.send({un:''})
   }
    
