@@ -113,7 +113,8 @@ app.post('/signup',async (req, res) => {
 
 // get username
 app.post('/getUsername', (req, res) => {
-  const token = req.body.token;
+  // const token = req.body.token;
+  // console.log(token)
   try {
     const user = jwt.verify(token,JWT_SECRET_KEY)
     return res.send({un:user.username});
@@ -122,7 +123,6 @@ app.post('/getUsername', (req, res) => {
   }
    
 })
-
 
 // get memories
 app.post('/memories',  async (req, res) => {
@@ -246,11 +246,11 @@ app.post('/deleteMemory', async(req,res) =>{
 })
 
 // get posts
-app.post('/posts', (req,res) =>{
+app.get('/posts', async(req,res) =>{
  
   let posts =[]
   try {
-    posts = post.find();
+    posts = await post.find();
     return res.send(posts)
   } catch (error) {
     return res.send('Could not fetch posts')
