@@ -111,6 +111,19 @@ app.post('/signup',async (req, res) => {
 })
 
 
+// get username
+app.post('/getUsername', (req, res) => {
+  const token = req.body.token;
+  try {
+    const user = jwt.verify(token,JWT_SECRET_KEY)
+    return res.send({un:user.username});
+  } catch (error) {
+    return res.send({un:''})
+  }
+   
+})
+
+
 // get memories
 app.post('/memories',  async (req, res) => {
   const token = req.body.token;
@@ -233,11 +246,11 @@ app.post('/deleteMemory', async(req,res) =>{
 })
 
 // get posts
-app.get('/posts', async(req,res) =>{
+app.post('/posts', (req,res) =>{
  
   let posts =[]
   try {
-    posts = await post.find();
+    posts = post.find();
     return res.send(posts)
   } catch (error) {
     return res.send('Could not fetch posts')
@@ -285,4 +298,5 @@ app.post('/add_new_post', upload.single("file"), async(req,res) =>{
 
 
 app.listen(port, () => {
+  console.log('running on ', port)
 })
